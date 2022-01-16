@@ -390,7 +390,7 @@ class _ExplorePageState extends State<ExplorePage> {
                                       );
                                     }):
                         ListView.builder(
-                            physics: NeverScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                             scrollDirection: Axis.vertical,
                             shrinkWrap: true,
                             itemCount: snapshot.data[1].orders.length,
