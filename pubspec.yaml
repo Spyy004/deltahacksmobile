@@ -45,6 +45,7 @@ dependencies:
   maps_launcher:
   fluttertoast:
   flutter_animation_progress_bar:
+  country_code_picker:
 dev_dependencies:
   flutter_test:
     sdk: flutter

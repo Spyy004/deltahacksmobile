@@ -57,10 +57,11 @@ class _LoginPageState extends State<LoginPage> {
                             border: Border.all(color: Colors.white),
                             borderRadius: BorderRadius.circular(10)),
                         child: TextFormField(
+                          style: const TextStyle(color: Colors.white),
                           controller: email,
                           cursorColor: Colors.black,
                           // keyboardType: TextInputType.,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             hintStyle: TextStyle(fontSize: 16,color: Colors.white),
                             hintText: 'Email',
                             border: InputBorder.none,
@@ -76,6 +77,7 @@ class _LoginPageState extends State<LoginPage> {
                             border: Border.all(color: Colors.white),
                             borderRadius: BorderRadius.circular(10)),
                         child: TextFormField(
+                          style: const TextStyle(color: Colors.white),
                           controller: password,
                           validator: (text){
                             if(text!.isEmpty)

@@ -93,4 +93,42 @@ class PostServices
     }
     return false;
   }
+  Future<dynamic> AddAddress(String address,String phone) async {
+    final prefs = await SharedPreferences.getInstance();
+    String accessToken = prefs.getString("access_token")!;
+    var url='https://getmedspy.herokuapp.com/users/';
+    Uri uri=Uri.parse(url);
+    var data={
+      "address":address,
+      "phone":phone,
+    };
+    var header={
+      "Content-Type":"application/json",
+      "Authorization":"Bearer $accessToken"
+    };
+    var req=await dio.put(url,data: data,options: Options(headers: header));
+    print(req.statusCode);
+    print(req.data);
+  }
+
+  Future<dynamic> CreateOrder(List medication,List symptoms,String name) async {
+    final prefs = await SharedPreferences.getInstance();
+    String accessToken = prefs.getString("access_token")!;
+    var url='https://getmedspy.herokuapp.com/orders/';
+    var data={
+      "items":medication,
+      "symptoms":symptoms,
+      "name":name,
+      "reputation":3,
+
+    };
+    var header={
+      "Content-Type":"application/json",
+      "Authorization":"Bearer $accessToken",
+    };
+
+    var req=await dio.post(url,data: data,options: Options(headers: header));
+    print(req.statusCode);
+
+  }
 }

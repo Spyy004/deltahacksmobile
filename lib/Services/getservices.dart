@@ -51,4 +51,18 @@ class GetServices{
     var request = await dio.get(uri,options: Options(headers: headers));
     print(request.data);
   }
+  Future<dynamic> userInfo () async{
+    final prefs = await SharedPreferences.getInstance();
+    String accessToken = prefs.getString("access_token")!;
+    var url=Uri.parse('https://getmedspy.herokuapp.com/users/info/useful/');
+
+    var header={
+      "Authorization":"Bearer $accessToken"
+    };
+    var req=await http.get(url,headers: header);
+    print(req.statusCode);
+    var js = jsonDecode(req.body);
+    print(js);
+    return js;
+  }
 }

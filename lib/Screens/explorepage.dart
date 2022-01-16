@@ -1,5 +1,6 @@
 import 'package:deltahacks/Constants/constants.dart';
 import 'package:deltahacks/Models/global_active_orders.dart';
+import 'package:deltahacks/Screens/profile_page.dart';
 import 'package:deltahacks/Services/getservices.dart';
 import 'package:deltahacks/Services/postservices.dart';
 import 'package:floating_bottom_navigation_bar/floating_bottom_navigation_bar.dart';
@@ -12,6 +13,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:maps_launcher/maps_launcher.dart';
 
 import 'homescreen.dart';
+import 'loginpage.dart';
 class ExplorePage extends StatefulWidget {
   const ExplorePage({Key? key}) : super(key: key);
 
@@ -396,9 +398,9 @@ class _ExplorePageState extends State<ExplorePage> {
                             itemCount: snapshot.data[1].orders.length,
                             reverse: true,
                             itemBuilder: (context,index){
-                              if(snapshot.data[1].orders.isNotEmpty)
+                              if(snapshot.data[1].orders.length>0)
                                 {
-                                  snapshot.data[1].orders[index].status!='delivered'? ListTile(
+                                   return ListTile(
                                     leading: Container(
                                       width: 0.13*width,
                                       height: 0.07*height,
@@ -592,7 +594,7 @@ class _ExplorePageState extends State<ExplorePage> {
                                         Text(snapshot.data![1].orders[index].reputation.toString(),style: getStarted.copyWith(fontWeight: FontWeight.w400,color: Colors.black),),
                                       ],
                                     ),
-                                  ):Container();
+                                  );
                                 }
                               return const Center(
                                 child: Text("No Orders Accepted By You"),
@@ -611,20 +613,32 @@ class _ExplorePageState extends State<ExplorePage> {
         onTap: (int val) {
           if(idx!=val) {
             idx = val;
-          }
-          if(val==0)
+            if(val==0)
             {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => HomePage()),
+                MaterialPageRoute(builder: (context) => const HomePage()),
               );
             }
-          if(val==1)
-          {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => ExplorePage()),
-            );
+            if(val==1)
+            {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ExplorePage()),
+              );
+            }
+            if(val==2)
+            {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ProfilePage()),
+              );
+            }
+            if(val==3)
+            {
+              Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+              const LoginPage()), (Route<dynamic> route) => false);
+            }
           }
         },
         backgroundColor: Color(0xfff37059),

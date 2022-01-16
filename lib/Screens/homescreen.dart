@@ -1,5 +1,6 @@
 import 'package:deltahacks/Constants/constants.dart';
 import 'package:deltahacks/Models/all_my_orders_model.dart';
+import 'package:deltahacks/Screens/profile_page.dart';
 import 'package:deltahacks/Screens/signuppage.dart';
 import 'package:deltahacks/Services/getservices.dart';
 import 'package:deltahacks/SharedPrefs/shared_preferences.dart';
@@ -11,7 +12,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'add_orders.dart';
 import 'explorepage.dart';
+import 'loginpage.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -109,10 +112,10 @@ class _HomePageState extends State<HomePage> {
                             onTap: ()async{
                               //dynamic l1 = await g1.getMyAllOrders();
 
-                              /*  Navigator.push(
+                                Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => const SignUpPage()),
-                              );*/
+                                MaterialPageRoute(builder: (context) => const AddOrders()),
+                              );
                             },
                             child: Container(
                               height: 0.05*height,
@@ -690,14 +693,33 @@ class _HomePageState extends State<HomePage> {
         onTap: (int val) {
           if(idx!=val) {
             idx = val;
-          }
-          if(val==1)
+            if(val==0)
+            {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const HomePage()),
+              );
+            }
+            if(val==1)
             {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => ExplorePage()),
               );
             }
+            if(val==2)
+            {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ProfilePage()),
+              );
+            }
+            if(val==3)
+            {
+              Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+              const LoginPage()), (Route<dynamic> route) => false);
+            }
+          }
         },
         backgroundColor: Color(0xfff37059),
         currentIndex: idx,
