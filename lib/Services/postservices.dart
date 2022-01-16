@@ -93,7 +93,7 @@ class PostServices
     }
     return false;
   }
-  Future<dynamic> AddAddress(String address,String phone) async {
+  Future<dynamic> AddAddress(String address,String phone,String upi) async {
     final prefs = await SharedPreferences.getInstance();
     String accessToken = prefs.getString("access_token")!;
     var url='https://getmedspy.herokuapp.com/users/';
@@ -101,6 +101,7 @@ class PostServices
     var data={
       "address":address,
       "phone":phone,
+      "payments":upi
     };
     var header={
       "Content-Type":"application/json",
@@ -114,13 +115,13 @@ class PostServices
   Future<dynamic> CreateOrder(List medication,List symptoms,String name) async {
     final prefs = await SharedPreferences.getInstance();
     String accessToken = prefs.getString("access_token")!;
+    print(accessToken);
     var url='https://getmedspy.herokuapp.com/orders/';
     var data={
       "items":medication,
       "symptoms":symptoms,
       "name":name,
       "reputation":3,
-
     };
     var header={
       "Content-Type":"application/json",
@@ -128,6 +129,7 @@ class PostServices
     };
 
     var req=await dio.post(url,data: data,options: Options(headers: header));
+    print(req.data);
     print(req.statusCode);
 
   }
